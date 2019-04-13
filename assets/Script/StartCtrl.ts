@@ -14,28 +14,43 @@ const {ccclass, property} = cc._decorator;
 export default class StartCtrl extends cc.Component {
 
     @property(cc.Node)
-    propertyLayer: cc.Node = null;
+    popupLayer: cc.Node = null;
 
     @property(cc.Node)
     sceneLayer: cc.Node = null;
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {}
 
     start () {
         console.log("ininin");
-        cc.loader.loadRes('prefabs/TestView', cc.Prefab, (err, result) => {
+        this.AddPropuCtrl();
+        this.OpenMainUI();
+    }
+
+    private AddPropuCtrl(): void {
+        cc.loader.loadRes('prefabs/PopupCtrl', cc.Prefab, (err, result) => {
             if (err)
             {
                 console.log("has error  ---> " + err.message);
                 return;            
             }
             let prefab = result as cc.Prefab;
-            let view = cc.instantiate(prefab);
+            let propuCtrl = cc.instantiate(prefab);
 
-            this.propertyLayer.addChild(view);
+            this.popupLayer.addChild(propuCtrl);
         });
     }
 
-    // update (dt) {}
+    private OpenMainUI():void {
+        cc.loader.loadRes('prefabs/MainUI', cc.Prefab, (err, result) => {
+            if (err)
+            {
+                console.log("has error  ---> " + err.message);
+                return;            
+            }
+            let prefab = result as cc.Prefab;
+            let main_ui = cc.instantiate(prefab);
+
+            this.popupLayer.addChild(main_ui);
+        });
+    }
+
 }

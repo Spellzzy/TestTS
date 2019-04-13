@@ -1,5 +1,4 @@
-import ViewCtrl from "./ViewCtrl";
-import PopupCtrl, { PopupLayerEnum } from "./PopupCtrl";
+import PopupCtrl from "./PopupCtrl";
 
 // Learn TypeScript:
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/typescript.html
@@ -13,22 +12,35 @@ import PopupCtrl, { PopupLayerEnum } from "./PopupCtrl";
 
 const {ccclass, property} = cc._decorator;
 
-@ccclass
-export default class TestViewCtrl  extends ViewCtrl {
+@ccclass    // 弹窗管理
+export default class ViewCtrl extends cc.Component {
 
-    @property(cc.Label)
-    label: cc.Label = null;
+    @property
+    hasMask: boolean = false;   //是否有半透遮罩
 
-    @property(cc.Button)
-    click_btn: cc.Button = null;
+    @property
+    touchOutClose: boolean = false; // 是否点击弹窗外关闭
 
-    start () {
-        this.label.string = "zzzzz";
-        
-        PopupCtrl.pushView(PopupLayerEnum.CONTENT, this, false);
+    // 将该页添加到栈中
+    public onAddToStack():void {
+
+    }
+
+    // 从栈中移除该页
+    public onRemoveFromStack():void {
+
+    }
+
+    // 实现统一的弹窗动画
+    public onPlayShowAni():void {
+
+    }
+
+    public onPlayHideAni():void {
         
     }
 
+    public OnShown(): void {
+    }
 
-    // update (dt) {}
 }
