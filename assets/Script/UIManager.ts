@@ -1,4 +1,4 @@
-import PopupCtrl from "./PopupCtrl";
+import { PopupLayerEnum } from "./view/PopupCtrl";
 
 // Learn TypeScript:
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/typescript.html
@@ -12,35 +12,21 @@ import PopupCtrl from "./PopupCtrl";
 
 const {ccclass, property} = cc._decorator;
 
-@ccclass    // 弹窗管理
-export default class ViewCtrl extends cc.Component {
+@ccclass
+export default class UIManager {
 
-    @property
-    hasMask: boolean = false;   //是否有半透遮罩
+    public static OpenUI(res: string, layer: PopupLayerEnum)
+    {
+        cc.loader.loadRes(res, cc.Prefab, (err, result) => {
+            if (err)
+            {
+                console.log("has error  ---> " + err.message);
+                return;            
+            }
+            let prefab = result as cc.Prefab;
+            let main_ui = cc.instantiate(prefab);
 
-    @property
-    touchOutClose: boolean = false; // 是否点击弹窗外关闭
-
-    // 将该页添加到栈中
-    public onAddToStack():void {
-
+            //this.popupLayer.addChild(main_ui);
+        });
     }
-
-    // 从栈中移除该页
-    public onRemoveFromStack():void {
-
-    }
-
-    // 实现统一的弹窗动画
-    public onPlayShowAni():void {
-
-    }
-
-    public onPlayHideAni():void {
-        
-    }
-
-    public OnShown(): void {
-    }
-
 }

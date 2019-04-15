@@ -21,7 +21,7 @@ export default class ViewGroup extends cc.Component {
     // 屏蔽操作层
     private blockLayer: cc.Node = null;
 
-    private viewLayer: cc.Node = null;
+    public viewLayer: cc.Node = null ;
 
     // 用来记录一层的弹窗
     private viewArray: Array<ViewCtrl> = [];
@@ -35,8 +35,6 @@ export default class ViewGroup extends cc.Component {
         }
         // 加入新页
         this.insertView(ctrl);
-
-        //this.node.addChild(ctrl.node);
 
         ctrl.onPlayShowAni();
 
@@ -60,17 +58,18 @@ export default class ViewGroup extends cc.Component {
         this.viewArray.push(ctrl);
 
         // todo 加入节点页面
-
+        this.viewLayer.addChild(ctrl.node);
         // 页面加入事件
         ctrl.onAddToStack();
     }
 
     // 移除窗口
     public removeView(ctrl: ViewCtrl): void {
+        // todo 从节点删除页面
+        this.viewLayer.removeChild(ctrl.node);
+        
         // 页面移除事件
         ctrl.onRemoveFromStack();
-
-        // todo 从节点删除页面
     }
 
 

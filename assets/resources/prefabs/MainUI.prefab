@@ -682,7 +682,9 @@
     "label": {
       "__id__": 16
     },
-    "click_btn": null,
+    "click_btn": {
+      "__id__": 13
+    },
     "_id": ""
   },
   {

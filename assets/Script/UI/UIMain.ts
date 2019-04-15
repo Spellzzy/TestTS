@@ -1,5 +1,5 @@
-import ViewCtrl from "./ViewCtrl";
-import PopupCtrl, { PopupLayerEnum } from "./PopupCtrl";
+import ViewCtrl from "../view/ViewCtrl";
+import PopupCtrl, { PopupLayerEnum } from "../view/PopupCtrl";
 
 // Learn TypeScript:
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/typescript.html
@@ -14,7 +14,7 @@ import PopupCtrl, { PopupLayerEnum } from "./PopupCtrl";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class TestViewCtrl  extends ViewCtrl {
+export default class UIMain extends ViewCtrl {
 
     @property(cc.Label)
     label: cc.Label = null;
@@ -23,12 +23,13 @@ export default class TestViewCtrl  extends ViewCtrl {
     click_btn: cc.Button = null;
 
     start () {
-        this.label.string = "zzzzz";
-        
-        PopupCtrl.pushView(PopupLayerEnum.CONTENT, this, false);
-        
+        //this.label.string = "zzzzz";
+        console.log("UImaIN  Start");
+        //this.click_btn.clickEvents
     }
 
+    OnShown() {
+        super.OnShown();
+    }
 
-    // update (dt) {}
 }

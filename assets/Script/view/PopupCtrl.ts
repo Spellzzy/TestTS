@@ -28,13 +28,13 @@ export default class PopupCtrl extends cc.Component {
         PopupCtrl.groupArr[PopupLayerEnum.ALERT] = new ViewGroup;
         PopupCtrl.groupArr[PopupLayerEnum.LOADING] = new ViewGroup;
 
-        this.node.addChild(new cc.Node("layer_" + PopupLayerEnum.CONTENT.toString()));
-        this.node.addChild(new cc.Node("layer_" + PopupLayerEnum.TIPS.toString()));
-        this.node.addChild(new cc.Node("layer_" + PopupLayerEnum.GUIDE.toString()));
-        this.node.addChild(new cc.Node("layer_" + PopupLayerEnum.ALERT.toString()));
-        this.node.addChild(new cc.Node("layer_" + PopupLayerEnum.LOADING.toString()));
+        for (let index = 0; index < 5; index++) {
+            var cur_node = new cc.Node("layer_" + index.toString());
+            PopupCtrl.groupArr[index].viewLayer = cur_node;
+            this.node.addChild(cur_node);
+        }
 
-        console.log("创建 UI各层记录管理 完成 ----->");
+        console.log("创建 UI各层记录管理 完成 ----->" + this.node.childrenCount.toString());
     }
 
     // 打开页面

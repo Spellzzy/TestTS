@@ -1,3 +1,7 @@
+import ViewCtrl from "./view/ViewCtrl";
+import UIMain from "./UI/UIMain";
+import PopupCtrl, { PopupLayerEnum } from "./view/PopupCtrl";
+
 // Learn TypeScript:
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/typescript.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/typescript.html
@@ -19,10 +23,11 @@ export default class StartCtrl extends cc.Component {
     @property(cc.Node)
     sceneLayer: cc.Node = null;
 
+    ui_main:UIMain = null;
+
     start () {
         console.log("ininin");
-        this.AddPropuCtrl();
-        this.OpenMainUI();
+        this.AddPropuCtrl();        
     }
 
     private AddPropuCtrl(): void {
@@ -36,10 +41,16 @@ export default class StartCtrl extends cc.Component {
             let propuCtrl = cc.instantiate(prefab);
 
             this.popupLayer.addChild(propuCtrl);
+
+            this.OpenMainUI();
         });
     }
 
     private OpenMainUI():void {
+        // 打开主UI
+
+        //  先加载主UI 预设体 设置好信息后 
+        // 加入显示层的结点之下
         cc.loader.loadRes('prefabs/MainUI', cc.Prefab, (err, result) => {
             if (err)
             {
@@ -49,7 +60,9 @@ export default class StartCtrl extends cc.Component {
             let prefab = result as cc.Prefab;
             let main_ui = cc.instantiate(prefab);
 
-            this.popupLayer.addChild(main_ui);
+            var ctrl = main_ui.getComponent("UIMain");
+            console.log("ui main == child  - > ");
+            PopupCtrl.pushView(PopupLayerEnum.CONTENT, ctrl, false);
         });
     }
 
